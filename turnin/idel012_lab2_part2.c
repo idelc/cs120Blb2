@@ -8,33 +8,35 @@
  *	code, is my own original work.
  */
 #include <avr/io.h>
+#include <stdlib.h>
 #ifdef _SIMULATE_
 #include "simAVRHeader.h"
 #endif
 
 int main(void) {
-    /* Insert DDR and PORT initializations */
-	DDRA = 0x00; PORTA = 0xFF;
-	DDRC = 0xFF; PORTC = 0x00;
+	/* Insert DDR and PORT initializations */
+        DDRA = 0x00; PORTA = 0xFF;
+        DDRC = 0xFF; PORTC = 0x00;
     /* Insert your solution below */
-	unsigned char tmpA = 0x00;
-	unsigned char tmpC = 0x00;
-	while (1) {
-		tmpA = PINA;
-        	tmpC = 0x00;
-		if((tmpA & 0x01) == 0x01){
-			tmpC = tmpC + 1;
-		}
-		if((tmpA & 0x02) == 0x02){
+        unsigned char tmpA = 0x00;
+        unsigned char tmpC = 0x00;
+        while (1) {
+                tmpA = PINA;
+                tmpC = 0x00;
+                if((tmpA & 0x01) == 0x01){
                         tmpC = tmpC + 1;
                 }
-		if((tmpA & 0x04) == 0x04){
+                if((tmpA & 0x02) == 0x02){
                         tmpC = tmpC + 1;
                 }
- 		if((tmpA & 0x08) == 0x08){
+                if((tmpA & 0x04) == 0x04){
                         tmpC = tmpC + 1;
                 }
-		PORTC = tmpC;	
-	}
-	return 1;
+                if((tmpA & 0x08) == 0x08){
+                        tmpC = tmpC + 1;
+                }
+                PORTC = 4-tmpC;
+
+        }
+        return 1;
 }
